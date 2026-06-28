@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>פאנל גלילה</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#111;
+  height:100vh;
+  overflow:hidden;
+  font-family:Arial,sans-serif;
+}
+
+#panel{
+  width:100%;
+  height:100vh;
+  background:#000;
+  color:#fff;
+  border:none;
+  outline:none;
+  resize:none;
+  padding:25px 20px 120px;
+  font-size:22px;
+  line-height:1.7;
+  direction:rtl;
+  text-align:right;
+  overflow-y:auto;
+}
+
+.controls{
+  position:fixed;
+  left:10px;
+  top:50%;
+  transform:translateY(-50%);
+  width:44px;
+  background:rgba(120,120,120,.85);
+  border-radius:30px;
+  padding:7px 0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:7px;
+  z-index:999;
+}
+
+.controls button{
+  width:34px;
+  height:34px;
+  border:none;
+  border-radius:50%;
+  background:#555;
+  color:white;
+  font-size:22px;
+  font-weight:bold;
+}
+
+#speed{
+  font-size:12px;
+  color:white;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<textarea id="panel" placeholder="הדבק כאן את הטקסט שלך&#10;&#10;לחיצה כפולה על הפאנל = התחלה / עצירה"></textarea>
+
+<div class="controls">
+  <button onclick="changeSpeed(0.05)">+</button>
+  <div id="speed">1.0</div>
+  <button onclick="changeSpeed(-0.05)">−</button>
+  <button onclick="toggleScroll()" id="playBtn">▶</button>
+  <button onclick="toggleDirection()" id="dirBtn">↓</button>
+</div>
+
+<script>
+const panel = document.getElementById("panel");
+const speedText = document.getElementById("speed");
+const playBtn = document.getElementById("playBtn");
+const dirBtn = document.getElementById("dirBtn");
+
+let running = false;
+let speed = 0.20;
+let direction = 1;
+let timer = null;
+
+speedText.textContent = speed.toFixed(2);
+
+function autoScroll(){
+  panel.scrollTop += direction;
+}
+
+function toggleScroll(){
+  running = !running;
+
+  if(running){
+    playBtn.textContent = "⏸";
+    timer = setInterval(autoScroll, 120 / speed);
+  }else{
+    playBtn.textContent = "▶";
+    clearInterval(timer);
+  }
+}
+
+function toggleDirection(){
+  direction *= -1;
+  dirBtn.textContent = direction === 1 ? "↓" : "↑";
+}
+
+function changeSpeed(amount){
+  speed += amount;
+
+  if(speed < 0.05) speed = 0.05;
+  if(speed > 3) speed = 3;
+
+  speedText.textContent = speed.toFixed(2);
+
+  if(running){
+    clearInterval(timer);
+    timer = setInterval(autoScroll, 120 / speed);
+  }
+}
+</script>
+
+
+</body>
+</html>
