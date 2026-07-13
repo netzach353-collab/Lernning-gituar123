@@ -28,7 +28,7 @@ body{
   outline:none;
   resize:none;
   padding:25px 20px 120px;
-  font-size:22px;
+  font-size:18px;
   line-height:1.7;
   direction:rtl;
   text-align:right;
@@ -76,9 +76,9 @@ body{
 <textarea id="panel" placeholder="הדבק כאן את הטקסט שלך&#10;&#10;לחיצה כפולה על הפאנל = התחלה / עצירה"></textarea>
 
 <div class="controls">
-  <button onclick="changeSpeed(0.25)">+</button>
+  <button onclick="changeSpeed(0.15)">+</button>
   <div id="speed">1.0</div>
-  <button onclick="changeSpeed(-0.25)">−</button>
+  <button onclick="changeSpeed(-0.15)">−</button>
   <button onclick="toggleScroll()" id="playBtn">▶</button>
   <button onclick="toggleDirection()" id="dirBtn">↓</button>
 </div>
@@ -90,7 +90,7 @@ const playBtn = document.getElementById("playBtn");
 const dirBtn = document.getElementById("dirBtn");
 
 let running = false;
-let speed = 1;
+let speed = 0.50;
 let direction = 1;
 
 
