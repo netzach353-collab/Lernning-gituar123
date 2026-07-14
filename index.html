@@ -27,15 +27,25 @@ body{
   border:none;
   outline:none;
   resize:none;
-  padding:105px 20px 120px;
+  padding:80px 20px 120px;
   font-size:18px;
   line-height:1.7;
+
   direction:rtl;
   text-align:right;
-  overflow-y:auto;
-  
-}
+  unicode-bidi:plaintext;
 
+  font-family:monospace;
+  white-space:pre;
+
+  overflow-x:auto;
+  overflow-y:auto;
+}
+  
+#panel{
+  unicode-bidi: plaintext;
+}
+  
 .controls{
   position:fixed;
   left:10px;
@@ -74,8 +84,13 @@ body{
 
 <body>
 
-<textarea id="panel" placeholder="הדבק כאן את הטקסט שלך&#10;&#10;לחיצה כפולה על הפאנל = התחלה / עצירה"></textarea>
-
+<textarea
+  id="panel"
+  wrap="off"
+  spellcheck="false"
+  placeholder="הדבק כאן את הטקסט שלך">
+</textarea>
+  
 <div class="controls">
   <button onclick="changeSpeed(0.10)">+</button>
   <div id="speed">1.0</div>
